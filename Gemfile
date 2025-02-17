@@ -28,6 +28,11 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+
+gem 'bcrypt', '~> 3.1.13'
+gem 'jwt', '~> 2.2'
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
@@ -61,3 +66,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+
