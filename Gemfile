@@ -29,6 +29,8 @@ gem "solid_queue"
 gem "solid_cable"
 
 
+
+
 gem "bcrypt", "~> 3.1.13"
 gem "jwt", "~> 2.2"
 

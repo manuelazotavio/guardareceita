@@ -1,5 +1,5 @@
 class RecipeController < ApplicationController
-  before_action :set_recipe, only: [:show, :update, :destroy]
+  before_action :set_recipe, only: [ :show, :update, :destroy ]
   def index
     recipes = Recipe.all
     render json: recipes
@@ -59,11 +59,11 @@ class RecipeController < ApplicationController
       render json: { error: "Ops, erro no servidor." }, status: :internal_server_error
     end
 
-    def destroy 
+    def destroy
       if @recipe.destroy
         render json: { success: "Receita #{@recipe.id} removida com sucesso." }
-      else 
-        render json: { error: "Erro ao excluir a receita."}, status: :unprocessable_entity
+      else
+        render json: { error: "Erro ao excluir a receita." }, status: :unprocessable_entity
       end
     end
 
