@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UserController < ApplicationController
     require "bcrypt"
 
     before_action :set_user, only: [ :show, :update, :destroy ]
