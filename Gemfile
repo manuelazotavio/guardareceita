@@ -29,8 +29,8 @@ gem "solid_queue"
 gem "solid_cable"
 
 
-gem 'bcrypt', '~> 3.1.13'
-gem 'jwt', '~> 2.2'
+gem "bcrypt", "~> 3.1.13"
+gem "jwt", "~> 2.2"
 
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -66,5 +66,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-

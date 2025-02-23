@@ -7,8 +7,6 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.text :avatar
 
       t.timestamps
-
-
     end
 
     add_index :users, :email, unique: true
