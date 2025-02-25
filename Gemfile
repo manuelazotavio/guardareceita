@@ -34,7 +34,7 @@ gem "solid_cable"
 gem "bcrypt", "~> 3.1.13"
 gem "jwt", "~> 2.2"
 
-gem 'dry-validation'
+gem "dry-validation"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
