@@ -32,7 +32,7 @@ class RecipeController < ApplicationController
 
     if recipe.save
       render json: {
-        success: "Receita #{recipe.id} criada com sucesso.",
+        success: "Receita #{@recipe.id} criada com sucesso.",
         recipe: recipe
       }
     else

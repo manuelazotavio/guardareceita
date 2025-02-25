@@ -32,7 +32,7 @@ class UserController < ApplicationController
 
       if user.save
         render json: {
-          success: "Usuário #{user.id} criado com sucesso.",
+          success: "Usuário #{@user.id} criado com sucesso.",
           user: user
         }
       else
