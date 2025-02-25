@@ -3,6 +3,9 @@ class AuthController < ApplicationController
 
   before_action :set_token, only: [ :login, :logout ]
 
+
+  TOKEN_EXPIRES_IN = 24.hours
+  DB_TOKEN_EXPIRES_DAYS = 1.day
   SECRET_KEY = Rails.application.secrets.secret_key_base
 
   def login
@@ -39,6 +42,45 @@ class AuthController < ApplicationController
       }
     }
   end
+
+  def refresh_token
+    session = Session.find_by(token: token)
+
+      if session.nil?
+        cookies.delete(:token, httponly: true, same_site: :none, secure: true)
+        render json: { error: "Sessão não encontrada, faça login novamente!", code: "logout" }, status: :unauthorized
+      end
+
+      new_token = JWT.encode({ id: current_user.id, name: current_user.name, exp: TOKEN_EXPIRES_IN.from_now.to_i }, SECRET_KEY, "HS256")
+
+      cookies[:token] = {
+        value: new_token,
+        httponly: true,
+        same_site: :none,
+        secure: true,
+        expires: 24.hours.from_now
+      }
+
+      session.update(token: new_token, created_at: Time.now)
+
+      render json: {
+        message: "Token atualizado com sucesso!",
+        new_token: new_token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar
+        }
+      }
+  rescue JWT::DecodeError
+      render json: { error: "Token inválido.", code: "logout" }, status: :unauthorized
+  rescue => e
+      Rails.logger.error e.message
+      render json: { error: "Ops, erro no servidor, tente novamente!" }, status: :internal_server_error
+  end
+
+
 
   def logout
         user = current_user
