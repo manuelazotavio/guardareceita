@@ -16,6 +16,8 @@ class UserController < ApplicationController
     def create
       user_params = params.require(:user).permit(:name, :email, :password, :avatar)
 
+      puts(:email)
+
       validation_result = validate_user_to_create(user_params)
 
       unless validation_result[:success]
